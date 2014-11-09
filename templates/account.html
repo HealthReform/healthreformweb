@@ -1,0 +1,119 @@
+<html>
+<head>
+    
+    {% load staticfiles %}
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <link rel="stylesheet" href=" {% static "root/home.css" %} ">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+      <script src = "{% static "root/account.js" %}"></script>
+    
+   
+    <title>Hospital Login</title> 
+</head>
+<body class = "login">
+
+    <nav class="navbar navbar-inverse" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="{% url "main" %}">HealthReform</a>
+   </div>
+        <div>
+     
+            <form class="navbar-form navbar-right" method = 'post' role = "form" > {% csrf_token %}
+            <div class="form-group">
+                <input type="submit" class="btn btn-default" name = "action" value = "Log out"  ></input>
+            </form>
+                
+            </div>
+       
+       <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Account</a>
+            </li>
+       </ul>
+   </div>
+</nav>
+   
+     {% if fieldsComplete == False %}
+        <div class = 'col-sm-6 col-sm-offset-3'>
+        <div class = "alert alert-danger" role = "alert"> Sorry, you didn't enter something for your password,name, or ID </div>
+        </div>
+    {% endif %}
+    
+    {% if success == True %}
+        <div class = 'col-sm-6 col-sm-offset-3'>
+        <div class = "alert alert-success" role = "alert"> You successfully updated your account! </div>
+        </div>
+    {% endif %}
+     {% if notInt == True %}
+        <div class = 'col-sm-6 col-sm-offset-3'>
+        <div class = "alert alert-danger" role = "alert"> Your ID must be a number! </div>
+        </div>
+    {% endif %}
+     {% if IDTaken == True %}
+        <div class = 'col-sm-6 col-sm-offset-3'>
+        <div class = "alert alert-danger" role = "alert"> This ID has already been taken,please try again! </div>
+        </div>
+    {% endif %}
+    
+    </br>
+    </br>
+    </br>
+    
+    
+    <div class = "container">
+        <h1 align = "center">Account Settings</h1>
+            
+        <form   method = 'post' role = "form">{% csrf_token %}
+            <div class="form-group" align = "center"> 
+                 <label>Name: </label>
+                <br>
+                <input type="text" id = "name" name = "name" placeholder = "{{Name}}" ></input>
+            <br>
+            <label>Hospital ID: </label>
+            <br>
+                <input type="text" id = "hospid" name = "hospid" placeholder = "{{ID}}" ></input>
+            <br>
+            <label>Password: </label>
+            <br>
+                <input type="text" id = "hospass" name = "hospass" placeholder = "{{Password}}" ></input>
+         
+            <br>
+            <label>Email: </label>
+            <br>
+                <input type="text"  id = "email" name = "email" placeholder = "{{Email}}" ></input>
+            <br>
+            <br>
+            <div class = "button row">
+                <button type="submit" class="btn btn-default" id = "edit" name = "action" value= "change" >Edit Settings</button>
+            </div>
+            </form>
+
+
+              <form   method = 'post' role = "form">{% csrf_token %}
+             <div class = "navbar-right">
+                 <input type="submit" name = "action" class="btn btn-danger" id = "delete" value = "Delete Account" ></button>
+</div>
+        
+  </div>
+
+       </br>
+     <hr>
+     <footer>
+        <p style = "color:black">&copy; Company 2014</p>
+      </footer>
+ 
+       
+   
+    
+   
+   
+   
+
+    
+</body> 
+
+
+</html>

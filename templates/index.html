@@ -1,0 +1,158 @@
+<html>
+<head>
+    
+    {% load staticfiles %}
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <link rel="stylesheet" href=" {% static "root/main1.css" %} ">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src = "{% static "root/logreg.js" %}"></script>
+   
+    <title>Hospital Login</title> 
+</head>
+<body class = "login">
+
+    
+    <div class = "navbar navbar-inverse" role = "navigation">
+        <div class = "container-fluid">
+        
+            <a class="navbar-brand" href="">Health Reform</a>
+            
+           
+           
+            <form  class = "navbar-form navbar-right" method = 'post' class = "form-inline" role = "form"> {% csrf_token %}
+               
+                <div class = "form-group">
+                       
+                    <input type = "text" name = 'username' class = "form-control" id = "username" placeholder="Hospital ID">
+                    
+                </div>
+                <div class = "form-group">
+                    
+                    <input type = "password" name = 'password' class = "form-control" id = "password" placeholder="Enter password">
+                    <input type = "submit" name = 'action' value = 'Login' class = "btn btn-default navbar-btn"></button>
+            </form>
+           
+            </div>
+           
+       </div>
+    </div>
+  </div>
+
+
+    {% if notInt == True %}
+        <div class = 'col-sm-6 col-sm-offset-3'>
+        <div class = "alert alert-danger" role = "alert"> Sorry your ID needs to be a number! </div>
+        </div>
+    {% endif %}
+    
+    {% if match == False %}
+        <div class = 'col-sm-6 col-sm-offset-3'>
+        <div class = "alert alert-danger" role = "alert"> Username or Password is incorrect, please try again! </div>
+        </div>
+    {% endif %}
+    {% if IDTaken == True %}
+        <div class = 'col-sm-6 col-sm-offset-3'>
+        <div class = "alert alert-danger" role = "alert"> The ID is already taken. Please try again! </div>
+        </div>
+     {% endif %}
+     {% if passwordMatch == False %}
+        <div class = 'col-sm-6 col-sm-offset-3'>
+        <div class = "alert alert-danger" role = "alert"> Passwords do not match. Please try again! </div>
+        </div>
+     {% endif %}
+    
+     <div class = 'col-sm-6 col-sm-offset-3'>
+     {% if messages %}
+    
+    {% for message in messages %}
+    <p  {% if message.tags == "success" %} class= "alert alert-success" {% endif %} >{{ message }} </p>
+    {% endfor %}
+    {% endif %}
+        </div>
+   
+    <div class = "container">
+        
+        <div class = "row">
+            <div class = "col-md-6 first">
+                <h2>Welcome!</h2>    
+                <h3>The Hospital Data Analysis website</h3>
+               
+               <button class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#mymodal">More info</button>
+                
+                <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+                              <h4 class="modal-title" id="myModalLabel">More Info</h4>
+                            </div>
+                            <div class="modal-body">
+                                 
+                               <iframe width="560" height="315" src="https://www.youtube.com/embed/CNMXW11NCN0" frameborder="0"     allowfullscreen></iframe>
+                                <ul class = "list-group">
+                                    <li class = "list-group-item"> Compare Revenues from previous years</li>
+                                    <li class = "list-group-item"> Upload Excel or CSV file with data</li>
+                                    <li class = "list-group-item"> Interactive Charts with analyzation of uploads</li>
+                                   
+                                 </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-md-6 second">
+                
+                
+                <h2>Sign Up!</h2>
+                
+                <form method = 'POST' action = '' class = "form-horizontal" role = "form"> {% csrf_token %}
+                
+                    
+                        
+                   <div class = form-group>
+         <input type = "text" class = "form-control signup" name = "hospName" id = "hospName" placeholder="Hospital Name">
+            </div>   
+        <div class = form-group>
+         <input type = "text" class = "form-control signup" name = "hospID" id = "hospID" placeholder="Hospital ID">
+            </div>
+        <div class = form-group>
+         <input type = "password" class = "form-control signup" name = "password" id = "hospPas"  placeholder="Enter Password">
+            </div>
+                               
+        <div class = form-group>
+         <input type = "password" class = "form-control signup" name = "reenter" id = "repassword" placeholder="Re-enter Password">
+            </div>
+            <div class = "sign-up">
+                <div class = "form-group">
+                    <input type = "submit" name = 'action' class = "btn btn-default sign" value = "Register" ></button>
+            </div>
+        </div>  
+                    
+                
+    </form>
+                
+                
+            </div>
+        </div>    
+     <hr>
+     <footer>
+        <p style = "color:black">&copy; Company 2014</p>
+      </footer>
+ 
+       
+   
+    
+   
+   
+   
+
+    
+</body> 
+
+
+</html>

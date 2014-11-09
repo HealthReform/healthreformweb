@@ -1,0 +1,66 @@
+<html>
+<head>
+    
+    {% load staticfiles %}
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <link rel="stylesheet" href=" {% static "root/home.css" %} ">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+   
+    <title>Hospital Login</title> 
+</head>
+<body class = "login">
+    
+    <nav class="navbar navbar-inverse" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="{% url "main" %}">HealthReform</a>
+   </div>
+        <div>
+     
+            <form class="navbar-form navbar-right" method = 'POST' role = "form" > {% csrf_token %}
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" name = "action" value = "Logout">Log out</button>
+            </form>
+                
+            </div>
+       
+       <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url "account" %}">Account</a>
+            </li>
+       </ul>
+   </div>
+</nav>
+   
+    <div class = "container">
+        <h1 align = "center" > Welcome {{hospName}} </h1>
+        <div class = "row">
+            <div class = "col-md-6 first">
+                
+            <div class = "col-md-6 second">
+                
+                
+              
+                
+            </div>
+        </div>    
+     <hr>
+     <footer>
+        <p style = "color:black">&copy; Company 2014</p>
+      </footer>
+ 
+       
+   
+    
+   
+   
+   
+
+    
+</body> 
+
+
+</html>

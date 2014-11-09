@@ -1,0 +1,46 @@
+.login{
+    
+  background-image:url('triangular.png'); 
+    
+    
+}
+.nav {
+ 
+    background-image: none;
+    background-color:#F0F0F0    ;
+    
+    
+}
+.nav h1{
+
+    display: inline;
+    
+ 
+}
+.container{
+  
+    
+}
+.nav li{
+ 
+    display: inline;
+}
+.pull-right{
+ 
+    display: inline;
+    
+}
+.row {
+    margin-top: 120;
+    color:white;
+}
+.col-md-6{
+    
+    opacity: 1;
+}
+.form-horizontal .form-group {
+    margin-left: auto;
+}
+.sign-up{
+    
+}
