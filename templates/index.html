@@ -64,6 +64,12 @@
         <div class = "alert alert-danger" role = "alert"> Passwords do not match. Please try again! </div>
         </div>
      {% endif %}
+    {% if validHosp == False %}
+        <div class = 'col-sm-6 col-sm-offset-3'>
+        <div class = "alert alert-danger" role = "alert"> Sorry, not a valid hospital ID! </div>
+        </div>
+     {% endif %}
+    
     
      <div class = 'col-sm-6 col-sm-offset-3'>
      {% if messages %}
@@ -80,9 +86,22 @@
             <div class = "col-md-6 first">
                 <h2>Welcome!</h2>    
                 <h3>The Hospital Data Analysis website</h3>
-               
-               <button class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#mymodal">More info</button>
                 
+<!--
+                <div style="width:400px;">
+                    <div style="float: left; width: 130px"> 
+                         <button class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#mymodal">More info</button>
+                    </div>
+-->
+                    <div class = "container"> 
+                        <form action="{% url "patient" %}">
+                            <input class = "btn btn-primary btn-lg" type="submit" value="Patient Beta">
+                        </form>
+                    </div>
+                </div>
+               
+                
+<!--
                 <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -104,9 +123,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class = "col-md-6 second">
                 
+
                 
                 <h2>Sign Up!</h2>
                 
@@ -119,6 +139,9 @@
             </div>   
         <div class = form-group>
          <input type = "text" class = "form-control signup" name = "hospID" id = "hospID" placeholder="Hospital ID">
+            </div>
+        <div class = form-group>
+         <input type = "text" class = "form-control signup" name = "email" id = "email" placeholder="Email">
             </div>
         <div class = form-group>
          <input type = "password" class = "form-control signup" name = "password" id = "hospPas"  placeholder="Enter Password">

@@ -2,7 +2,7 @@
            
             $(".container").hide().fadeIn(1000);
             
-            moduleFocus();
+
             signDescriptions();
             loginEnable();
             
@@ -136,18 +136,18 @@
             
         }
             
-        function moduleFocus(){
-            
-             $(".col-md-6").on("mouseenter",function(){
-                $(this).css({"color":"black","border":"2px solid"});
-                
-            });
-            $(".col-md-6").on("mouseleave",function(){
-                $(this).css({"color":"white","border":"none"});
-                
-                
-            });
-            
-        }
-            
+//        function moduleFocus(){
+//            
+//             $(".col-md-6").on("mouseenter",function(){
+//                $(this).css({"color":"black","border":"2px solid"});
+//                
+//            });
+//            $(".col-md-6").on("mouseleave",function(){
+//                $(this).css({"color":"white","border":"none"});
+//                
+//                
+//            });
+//            
+//        }
+//            
         $(document).ready(main);

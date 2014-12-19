@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inpatient Revenue</title>
+
+    <link rel="stylesheet" type="text/css" href=" {% static "root/bootstrap.css" %} " />
+    <link rel="stylesheet" type="text/css" href="{% static "font-awesome.min.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "root/local.css" %}" />
+    
+
+       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+ 
+
+    <!-- you need to include the shieldui css and js assets in order for the charts to work -->
+    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
+    <link id="gridcss" rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/dark-bootstrap/all.min.css" />
+
+    <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+    <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
+    
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  
+  <!-- Load the jQuery UI CSS -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    
+</head>
+<body>
+
+    <div id="wrapper">
+
+          <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url "home" %}">HealthReform</a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul id="active" class="nav navbar-nav side-nav">
+                    <li class="selected"><a href="index.html"><i class="fa fa-bullseye"></i>Inpatient Revenue Breakdown </a></li>
+                    <li><a href="{% url "outpatient" %}"><i class="fa fa-tasks"></i> Outpatient Revenue Breakdown</a></li>
+                    <li><a href="{% url "surgery" %}"><i class="fa fa-globe"></i> Surgeries</a></li>
+                    <li><a href="{% url "rank" %}"><i class="fa fa-list-ol"></i> Rank</a></li>
+                    <li><a href="{% url "correlation" %}"><i class="fa fa-list-ol"></i>Performance Analysis</a></li>
+                    <li><a href="{% url "account" %}"><i class="fa fa-list-ol"></i> Account</a></li>
+                    
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right navbar-user">
+                    
+                    <li class="dropdown user-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{hospName}} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url "account"%}"><i class="fa fa-gear"></i> Settings</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url "logout" %}"><i class="fa fa-power-off"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Inpatient Revenue Breakdown</h1>
+                   <!-- <div class="alert alert-dismissable alert-warning">
+                        <button data-dismiss="alert" class="close" type="button">×</button>
+                        <h4>Warning!</h4>
+                        <p>You have two new messages.
+                            </p> 
+                    </div> -->
+                </div>
+            </div>
+
+            <div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li id = "inpatientTab" role="presentation" class="active"><a href="#Inpatient" aria-controls="Inpatient" role="tab" data-toggle="tab">Inpatient</a></li>
+    
+    
+  </ul>
+
+    
+                
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="Inpatient"> 
+        </br>
+        <div class="row">
+
+                <div class="col-md-8">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            
+                            <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Revenue Comparisons </h3>
+                        </div>
+                        <div class="panel-body">
+                            <!--  The div that is used as the slider container  -->
+                            <div id="slider" ></div>
+  
+                            <!--  The div that is used to display the slider value  -->
+                                <div id="amount" style="color:#777;font-size:72px;text-align:center;"></div>
+                            <form method='post' id ='test'>{% csrf_token %}
+                                   
+                                    <input id = "hiddenin" type="hidden" name = "hiddeninput" value="video34" />
+                                    <input id = "hiddenout" type="hidden" name = "hiddenoutput" value="video34" />
+                                    <input id = "hiddensubmit" type='submit' style = ";" value='change'/>
+
+                                   
+
+                            </form>
+                            </br>
+                           <div id="inpatientChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+   
+    
+  </div>
+
+</div>
+            
+        
+    <script src="{% static "root/Chart.min.js" %}"></script>
+    <!-- /#wrapper -->
+    <script >
+       
+         
+    
+        
+       $(function () {
+        
+            $("#hiddensubmit").hide();
+            $( "#slider" ).slider({
+                range: "min",
+                value: {{startYear}},
+                min: 2009,
+                max: 2013,
+                    
+            slide: function( event, ui ) {
+      
+            // While sliding, update the value in the #amount div element
+            $( "#amount" ).html( ui.value );
+            $("#hiddenin").attr("value",ui.value);
+            $("#hiddensubmit").trigger("click");
+        }
+    });
+    
+        // Set the initial slider amount in the #amount div element
+        var value = $( "#slider" ).slider( "value" );
+        $( "#amount" ).html( value );
+           
+    
+           
+          $( "#slider1" ).slider({
+          range: "min",
+          value: 2013,
+          min: 2009,
+          max: 2013,
+          slide: function( event, ui ) {
+
+            // While sliding, update the value in the #amount div element
+            $( "#amount1" ).html( ui.value );
+            $("#hiddenout").attr("value",ui.value);
+            $("#hiddensubmit").trigger("click");
+            
+
+          }
+        });
+
+        // Set the initial slider amount in the #amount div element
+        var value = $( "#slider1" ).slider( "value" );
+        $( "#amount1" ).html( value );
+
+           
+           
+    $('#inpatientChart').highcharts({
+        
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: 1,//null,
+            plotShadow: false
+        },
+        title: {
+            
+            text: 'Revenue division by payment source for inpatients'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Revenue share',
+            data: [
+                ['Medicaid Revenue',   {{medicaidInRev}} ],
+                ['Medicare Revenue',       {{medicareInRev}}],
+                ['Other Public Revenue',     {{otherPublicInRev}}],
+                ['Private Revenue',   {{privateInRev}} ]
+            ]
+            }]
+        });
+           
+           
+           
+           
+        $('#outpatientChart').highcharts({
+        
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: 1,//null,
+            plotShadow: false
+        },
+        title: {
+            
+            text: "Revenue division by payment source for outpatients"
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            },
+             series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                    click: function() {
+                        alert (this.y);
+                    }
+                }
+            }
+        }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Revenue share',
+            data: [
+                ['Medicaid Revenue',   {{medicaidOutRev}} ],
+                ['Medicare Revenue',       {{medicareOutRev}}],
+                ['Other Public Revenue',     {{otherPublicOutRev}}],
+                ['Private Revenue',   {{privateOutRev}} ]
+            ]
+            }]
+        });
+    
+        
+     });
+
+                                            
+    </script>
+</body>
+</html>

@@ -58,8 +58,57 @@ WSGI_APPLICATION = 'healthreform.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'Data_2013',
+        'USER': 'tdesai',
+        'PASSWORD': '#ToBollywood',
+        'HOST': 'fordemo.c91e6955bgwn.us-west-2.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306'
+    },
+    '2012': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'Data_2012',
+        'USER': 'tdesai',
+        'PASSWORD': '#ToBollywood',
+        'HOST': 'fordemo.c91e6955bgwn.us-west-2.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306'
+
+    },
+    '2011': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'Data_2011',
+        'USER': 'tdesai',
+        'PASSWORD': '#ToBollywood',
+        'HOST': 'fordemo.c91e6955bgwn.us-west-2.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306'
+
+    },
+    '2010': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'Data_2010',
+        'USER': 'tdesai',
+        'PASSWORD': '#ToBollywood',
+        'HOST': 'fordemo.c91e6955bgwn.us-west-2.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306'
+
+    },
+    '2009': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'Data_2009',
+        'USER': 'tdesai',
+        'PASSWORD': '#ToBollywood',
+        'HOST': 'fordemo.c91e6955bgwn.us-west-2.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306'
+
+    },
+    'user':{
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'Data_Users',
+        'USER': 'tdesai',
+        'PASSWORD': '#ToBollywood',
+        'HOST': 'fordemo.c91e6955bgwn.us-west-2.rds.amazonaws.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306'
+
     }
 }
 
@@ -87,4 +136,7 @@ STATICFILES_DIRS = (
 )
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
+
+
 

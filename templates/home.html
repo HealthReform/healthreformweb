@@ -6,12 +6,12 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <!-- Latest compiled and minified JavaScript -->
-    <link rel="stylesheet" href=" {% static "root/home.css" %} ">
+    <link rel="stylesheet" href=" {% static "root/home1.css" %} ">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     
    
-    <title>Hospital Login</title> 
+    <title>Hospital Home</title> 
 </head>
 <body class = "login">
     
@@ -31,28 +31,38 @@
        <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url "account" %}">Account</a>
             </li>
+           <li><a href="{% url "dashboard" %}">Dashboard</a>
+            </li>
        </ul>
    </div>
 </nav>
    
-    <div class = "container">
-        <h1 align = "center" > Welcome {{hospName}} </h1>
-        <div class = "row">
-            <div class = "col-md-6 first">
-                
-            <div class = "col-md-6 second">
-                
-                
-              
-                
-            </div>
-        </div>    
-     <hr>
-     <footer>
-        <p style = "color:black">&copy; Company 2014</p>
-      </footer>
- 
+    
+    
+    
        
+          
+         
+           <div class = "container">
+        <h1 align = "center" > Welcome {{hospName}} </h1>
+        </br>
+        <div align = "center">
+        <iframe width="700" height="450" src="https://www.youtube.com/embed/CNMXW11NCN0" frameborder="0"     allowfullscreen></iframe>
+            </div>
+        
+                
+       </div>  
+           
+        
+           
+     <hr>
+          </h1>
+
+         
+
+      </div><!--/row-->
+	</div>
+</div><!--/.container-->
    
     
    

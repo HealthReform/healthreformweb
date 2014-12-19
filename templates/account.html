@@ -1,42 +1,63 @@
-<html>
-<head>
-    
-    {% load staticfiles %}
-    
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <!-- Latest compiled and minified JavaScript -->
-    <link rel="stylesheet" href=" {% static "root/home.css" %} ">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-      <script src = "{% static "root/account.js" %}"></script>
-    
-   
-    <title>Hospital Login</title> 
-</head>
-<body class = "login">
 
-    <nav class="navbar navbar-inverse" role="navigation">
-   <div class="navbar-header">
-      <a class="navbar-brand" href="{% url "main" %}">HealthReform</a>
-   </div>
-        <div>
-     
-            <form class="navbar-form navbar-right" method = 'post' role = "form" > {% csrf_token %}
-            <div class="form-group">
-                <input type="submit" class="btn btn-default" name = "action" value = "Log out"  ></input>
-            </form>
-                
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+
+    <link rel="stylesheet" type="text/css" href=" {% static "root/bootstrap.css" %} " />
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static "root/local.css" %}" />
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>        
+</head>
+<body>
+
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url "home" %}">HealthReform</a>
             </div>
-       
-       <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Account</a>
-            </li>
-       </ul>
-   </div>
-</nav>
-   
-     {% if fieldsComplete == False %}
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li><a href="{%url "dashboard"%} "><i class="fa fa-bullseye"></i> Inpatient Revenue Breakdown</a></li>
+                    <li><a href="{% url "outpatient"%}"><i class="fa fa-tasks"></i> Outpatient Revenue Breakdown</a></li>
+                     <li><a href="{% url "surgery" %}"><i class="fa fa-globe"></i> Surgeries</a></li>
+                    <li><a href="{% url "rank" %}"><i class="fa fa-list-ol"></i> Rank</a></li>
+                     <li><a href="{% url "correlation" %}"><i class="fa fa-list-ol"></i>Performance Analysis</a></li>
+                    <li class="selected"><a href="{% url "account"%}"><i class="fa fa-list-ol"></i> Account</a></li>
+                            
+                </ul>
+                <ul class="nav navbar-nav navbar-right navbar-user">
+                    
+                     <li class="dropdown user-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{hospName}}<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="{% url "account"%}"><i class="fa fa-gear"></i> Settings</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url "logout" %}"><i class="fa fa-power-off"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+       <div id="page-wrapper">
+
+            <div class="row">
+                
+
+                   {% if fieldsComplete == False %}
         <div class = 'col-sm-6 col-sm-offset-3'>
         <div class = "alert alert-danger" role = "alert"> Sorry, you didn't enter something for your password,name, or ID </div>
         </div>
@@ -63,57 +84,156 @@
     </br>
     
     
+ 
     <div class = "container">
-        <h1 align = "center">Account Settings</h1>
+        <h1  >Account Settings</h1>
             
         <form   method = 'post' role = "form">{% csrf_token %}
-            <div class="form-group" align = "center"> 
+            <div class="form-group" class = "form-group" > 
                  <label>Name: </label>
                 <br>
-                <input type="text" id = "name" name = "name" placeholder = "{{Name}}" ></input>
+                <input class = "form-control" type="text" id = "name" name = "name" placeholder = "{{Name}}" ></input>
             <br>
+            
             <label>Hospital ID: </label>
             <br>
-                <input type="text" id = "hospid" name = "hospid" placeholder = "{{ID}}" ></input>
+                <input class = "form-control" type="text" id = "hospid" name = "hospid" placeholder = "{{ID}}" ></input>
             <br>
             <label>Password: </label>
             <br>
-                <input type="text" id = "hospass" name = "hospass" placeholder = "{{Password}}" ></input>
+                <input class = "form-control" type="text" id = "hospass" name = "hospass" placeholder = "{{Password}}" ></input>
          
             <br>
             <label>Email: </label>
             <br>
-                <input type="text"  id = "email" name = "email" placeholder = "{{Email}}" ></input>
+                <input class = "form-control" type="text"  id = "email" name = "email" placeholder = "{{Email}}" ></input>
             <br>
             <br>
-            <div class = "button row">
-                <button type="submit" class="btn btn-default" id = "edit" name = "action" value= "change" >Edit Settings</button>
+            <div class = "button row" style = " position:relative;
+ top:15px;
+ left:0px;">
+                <button type="button" class="btn btn-default" id = "edit" name = "action"  >Edit Settings</button>
+                
+               
             </div>
+            </br>
+            </br>
+             <input style = "position:relative; left:-15px;" type="submit" name = "action" class="btn btn-danger" id = "delete" value = "Delete Account" ></button>
             </form>
 
-
+              </br>
               <form   method = 'post' role = "form">{% csrf_token %}
-             <div class = "navbar-right">
-                 <input type="submit" name = "action" class="btn btn-danger" id = "delete" value = "Delete Account" ></button>
+             <div >
+                 </br>
+                  </br>
+                 
 </div>
         
   </div>
 
-       </br>
-     <hr>
-     <footer>
-        <p style = "color:black">&copy; Company 2014</p>
-      </footer>
- 
+               
+                <div class="col-lg-6" >
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>    
+<script>
+        var name = "{{Name}}"
+        var pass = "{{Password}}"
+        var id = "{{ID}}"
+        var email = "{{Email}}"
+
+var main = function(){
+           
+            edit();
+            cancel();
+             $('[data-toggle=offcanvas]').click(function() {
+    $('.row-offcanvas').toggleClass('active');
+  });
+            
+        };
+
+ function edit(){
+     
+     $("#name").attr("disabled","disabled");
+     $("#hospid").attr("disabled","disabled");
+     $("#hospass").attr("disabled","disabled");
+     $("#email").attr("disabled","disabled");
+     
+     
+      $(".container").on("click","#edit",function(){
+            $("#name").removeAttr("disabled","disabled");
+            $("#hospid").removeAttr("disabled","disabled");
+            $("#hospass").removeAttr("disabled","disabled");
+            $("#email").removeAttr("disabled","disabled");
+            
+          
+            $(this).remove();
+            
+            name = $("#name").attr("placeholder");
+            id = $("#hospid").attr("placeholder");
+            pass =$("#hospass").attr("placeholder");
+            email = $("#email").attr("placeholder");
+          
+            $("#name").attr("value",name);
+            $("#hospid").attr("value",id);
+            $("#hospass").attr("value",pass);
+            $("#email").attr("value",email);
+          
+             var cancel = $('<button type="submit" class="btn btn-default" id = "cancel" name = "action" value = "cancel" >Cancel Edit</button>');
+            var change = $('<button type="submit" class="btn btn-default" id = "change" name = "action" value = "change" >Submit Changes</button>');
+            
+            $(".button").append(cancel);
+            $(".button").append(change);
+          
+            
+            
+            
+               
+           });
+     
        
-   
+     
+     
+ }
+function cancel(){
     
-   
-   
-   
+     $(".container").on("click","#cancelEdit",function(){
+         
+             
+            $("#name").attr("disabled","disabled");
+            $("#hospid").attr("disabled","disabled");
+            $("#hospass").attr("disabled","disabled");
+            $("#email").attr("disabled","disabled");
+         
+            $("#name").attr("placeholder",name);
+            $("#hospid").attr("placeholder",id);
+            $("#hospass").attr("placeholder",pass);
+            $("#email").attr("placeholder",email);
+          
+            $(this).remove();
+            $("#change").remove();
+          
+            var edit = $('<button type="button" class="btn btn-default" id = "edit" >Edit Settings</button>');
+            $(".button").append(edit);
+            
+            
+               
+           });
+    
+    
 
     
-</body> 
+}
+     
+$(document).ready(main);   
+     
 
 
+
+
+    </script>
+</body>
 </html>

@@ -1,0 +1,162 @@
+<html>
+<head>
+    
+    {% load staticfiles %}
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <link rel="stylesheet" href=" {% static "root/home1.css" %} ">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+   
+    <title>Patient Beta</title> 
+</head>
+<body class = "login">
+    
+    <nav class="navbar navbar-inverse" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="{% url "main" %}">HealthReform</a>
+   </div>
+        <div>
+     
+            <div class="form-group">
+                
+                
+            </div>
+       
+       <ul class="nav navbar-nav navbar-right">
+            
+            
+       </ul>
+   </div>
+</nav>
+
+         {% if hospNotFound == True %}
+        <div class = "container">
+        <div class = "alert alert-danger" role = "alert">Sorry, could not find hospital! </div>
+        </div>
+        {% endif %}
+         {% if validZip == False %}
+        <div class = "container">
+        <div class = "alert alert-danger" role = "alert">Please enter a valid zipcode. </div>
+        </div>
+        {% endif %}
+    
+        <h1 align = "center" >Patient Beta</h1>
+        <p align = "center">Choose a procedure and we will inform you of the top hospital to go to in terms of cost and location</p>
+    
+        <form class="form-horizontal" role="form" method = "post" > {% csrf_token %}
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Procedure</label>
+        <div class="col-sm-5">
+         <select class="form-control" id = "procSelect" name = "procSelect">
+             {% for proc in listOfProcedures %}
+            <option value = "{{proc}}" >{{proc}}</option>
+             {% endfor %}
+        </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-4 control-label">Zip Code</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="inputZip" name = "inputZip" placeholder="Zip Code">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+          <input type="submit" class="btn btn-default" name = 'action' value = "Find"></button>
+        </div>
+      </div>
+    </form>
+    
+    
+    <h4 align = "center">Hospital Search</h3>
+    <p align = "center">Find all procedure costs for hospital</p>
+     <form class="form-horizontal" role="form" style = "position:relative;left:85px;" method = "post">  {% csrf_token %}
+     
+      <div class="form-group" >
+        <label for="inputPassword3" class="col-sm-4 control-label">Hospital Name</label>
+        <div class="col-sm-3" >
+          <input type="text" class="form-control" id="hospInput" name = "hospInput" placeholder="Hospital Name">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+          <input type="submit" class="btn btn-default" name = 'action' value = "Search"></button>
+        </div>
+      </div>
+    </form>
+
+    {% if foundBest == True %}
+     <div class = "container" align = "center">
+            <h1>Best Hospital: {{bestHospital}}</h1>
+             <table class = "table table-bordered table-hover" style = "max-width:80%; " >
+                <thead>
+                    <tr>
+                        <th>Procedure</th>
+                        <th>Cost</th>
+                        
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                   
+                    <tr>
+                        <td>{{finalProc}}</td>
+                        <td>${{smallestVal}}</td>
+                        
+                    </tr>
+                   
+             </tbody>
+            </table>
+     {% endif %}    
+        
+    {% if Procedures == True %}
+     <div class = "container" align = "center">
+            <h1>{{name}} Procedures</h1>
+             <table class = "table table-bordered table-hover" style = "max-width:80%; " >
+                <thead>
+                    <tr>
+                        <th>Procedures</th>
+                        <th>Cost</th>
+                        
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    {% for x,y in combined %}
+                    <tr>
+                        <td>{{y}}</td>
+                        <td>{{x}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+             </tbody>
+            </table>
+     {% endif %}
+         
+    
+         
+
+         
+
+      </div><!--/row-->
+	</div>
+</div><!--/.container-->
+   
+   
+   
+
+    
+</body> 
+
+
+</html>
